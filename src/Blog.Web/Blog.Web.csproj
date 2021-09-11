@@ -6,4 +6,9 @@
     <RootNamespace>Blog</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Business\Categories\" />
+    <Folder Include="Business\Comments\" />
+  </ItemGroup>
+
 </Project>
