@@ -2,50 +2,34 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Blog</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>@ViewData["Title"] | Semantic-Blog</title>
+    <link rel="stylesheet" href="~/lib/fomantic-ui/semantic.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">Blog</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Articles/Index">Articles</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+    <header class="ui container basic segment">
+        <nav class="ui secondary stackable pointing menu">
+            <a class="active item" asp-area="" asp-page="/Index">Semantic-Blog</a>
+            <a class="item" asp-area="" asp-page="/Index">Home</a>
+            <a class="item" asp-area="" asp-page="/Articles/Index">Articles</a>
+            <a class="item" asp-area="" asp-page="/Categories/Index">Categories</a>
+            <a class="item" asp-area="" asp-page="/Comments/Index">Comments</a>
+            <a class="item" asp-area="" asp-page="/Privacy">Privacy</a>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2021 - Blog - <a asp-area="" asp-page="/Privacy">Privacy</a>
-        </div>
+    <main role="main" class="ui container">
+        @RenderBody()
+    </main>
+
+    <footer class="ui container segment">
+        &copy; 2021 | Semantic-Blog
     </footer>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/fomantic-ui/semantic.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
