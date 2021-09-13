@@ -9,8 +9,18 @@ namespace Blog.Business.Articles
 {
     public class IndexModel : PageModel
     {
+        public IEnumerable<Article> Articles { get; set; }
+
+        private readonly IArticlesQuery articlesQuery;
+
+        public IndexModel(IArticlesQuery articlesQuery)
+        {
+            this.articlesQuery = articlesQuery;            
+        }
+
         public void OnGet()
         {
+            Articles = articlesQuery.GetArticles();
         }
     }
 }

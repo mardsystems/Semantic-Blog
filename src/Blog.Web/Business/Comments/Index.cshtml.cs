@@ -9,8 +9,18 @@ namespace Blog.Business.Comments
 {
     public class IndexModel : PageModel
     {
+        public IEnumerable<Comment> Comments { get; set; }
+
+        private readonly ICommentsQuery commentsQuery;
+
+        public IndexModel(ICommentsQuery commentsQuery)
+        {
+            this.commentsQuery = commentsQuery;
+        }
+
         public void OnGet()
         {
+            Comments = commentsQuery.GetComments();
         }
     }
 }

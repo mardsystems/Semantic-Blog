@@ -9,8 +9,18 @@ namespace Blog.Business.Categories
 {
     public class IndexModel : PageModel
     {
+        public IEnumerable<Category> Categories { get; set; }
+
+        private readonly ICategoriesQuery categoriesQuery;
+
+        public IndexModel(ICategoriesQuery categoriesQuery)
+        {
+            this.categoriesQuery = categoriesQuery;
+        }
+
         public void OnGet()
         {
+            Categories = categoriesQuery.GetCategories();
         }
     }
 }

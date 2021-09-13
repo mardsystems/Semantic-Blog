@@ -3,6 +3,15 @@
 @{
     ViewData["Title"] = "Comments";
 }
+
 <h1>@ViewData["Title"]</h1>
 
-<p>Content</p>
+@foreach (var comment in Model.Comments)
+{
+    <div id="@comment.CommentId" class="ui segment">
+        <div>@comment.Text</div>
+        <footer>
+            <a rel="view-item" href="">View</a>
+        </footer>
+    </div>
+}
