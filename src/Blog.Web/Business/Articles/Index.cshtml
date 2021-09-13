@@ -3,6 +3,24 @@
 @{
     ViewData["Title"] = "Articles";
 }
-<h1>@ViewData["Title"]</h1>
 
-<p>Content</p>
+<h1 class="ui header">@ViewData["Title"]</h1>
+
+@foreach (var article in Model.Articles)
+{
+    <article id="@article.Id" title="@article.Title" class="ui segment">
+        <header>
+            <h2 class="ui header">@article.Title</h2>
+        </header>
+        <div>@article.Content</div>
+        <ul>
+            @foreach (var category in article.Categories)
+            {
+                <li>@category.Description</li>
+            }
+        </ul>
+        <footer>
+            <a rel="view-item" href="">View</a>
+        </footer>
+    </article>
+}

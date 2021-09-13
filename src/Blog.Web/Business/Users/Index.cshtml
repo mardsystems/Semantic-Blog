@@ -1,7 +1,7 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Categories";
+    ViewData["Title"] = "Users";
 }
 
 <h1>@ViewData["Title"]</h1>
@@ -10,18 +10,18 @@
     <thead>
         <tr>
             <th>Id</th>
-            <th>Description</th>
-            <th>Total Articles</th>
+            <th>Name</th>
+            <th>E-mail</th>
             <th>Actions</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var category in Model.Categories)
+        @foreach (var user in Model.Users)
         {
             <tr>
-                <td data-label="Id">@category.Id</td>
-                <td data-label="Description">@category.Description</td>
-                <td data-label="Total Articles">@category.TotalArticles</td>
+                <td data-label="Id">@user.Id</td>
+                <td data-label="Name">@user.Name</td>
+                <td data-label="Email">@user.Email</td>
                 <td data-label="Actions">
                     <a rel="view-item" href="">View</a>
                 </td>
