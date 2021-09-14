@@ -17,12 +17,12 @@ namespace Blog.Business.Users
 
         private static void AddDomainModel(this IServiceCollection services)
         {
-            services.AddSingleton<IUsersRepository, InMemoryDataService>();
+            services.AddSingleton<IUsersRepository>(ctx => ctx.GetService<InMemoryDataService>());
         }
 
         private static void AddUsersQuery(this IServiceCollection services)
         {
-            services.AddSingleton<IUsersQuery, InMemoryDataService>();
+            services.AddSingleton<IUsersQuery>(ctx => ctx.GetService<InMemoryDataService>());
         }
     }
 }

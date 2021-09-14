@@ -17,12 +17,12 @@ namespace Blog.Business.Comments
 
         private static void AddDomainModel(this IServiceCollection services)
         {
-            services.AddSingleton<ICommentsRepository, InMemoryDataService>();
+            services.AddSingleton<ICommentsRepository>(ctx => ctx.GetService<InMemoryDataService>());
         }
 
         private static void AddCommentsQuery(this IServiceCollection services)
         {
-            services.AddSingleton<ICommentsQuery, InMemoryDataService>();
+            services.AddSingleton<ICommentsQuery>(ctx => ctx.GetService<InMemoryDataService>());
         }
     }
 }

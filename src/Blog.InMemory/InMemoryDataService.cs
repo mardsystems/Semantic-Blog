@@ -2,7 +2,9 @@
 using Blog.Business.Categories;
 using Blog.Business.Comments;
 using Blog.Business.Users;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Blog
 {
@@ -55,9 +57,23 @@ namespace Blog
             comments = new List<Comment>();
         }
 
-        public Article[] GetArticles()
+        public Article[] GetArticles(ArticlesQueryRequest request)
         {
-            return articles.ToArray();
+            return articles
+                .Where(article => request.Title == null ? true : article.Title.Contains(request.Title))
+                .ToArray();
+        }
+
+        public Article GetArticle(ArticleId id)
+        {
+            var article = articles.FirstOrDefault(article => article.Id.Value == id.Value);
+
+            if (article == default)
+            {
+                throw new ApplicationException();
+            }
+
+            return article;
         }
 
         public void Add(Article article)
@@ -77,7 +93,9 @@ namespace Blog
 
         public Business.Categories.Category[] GetCategoriesBy(CategoryId[] ids)
         {
-            return categories.ToArray();
+            return categories
+                .Where(category => ids.Select(id => id.Value).Contains(category.Id.Value))
+                .ToArray();
         }
 
         public Comment[] GetComments()

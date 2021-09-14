@@ -33,9 +33,11 @@ namespace Blog.Business.Articles
             this.commentsRepository = commentsRepository;
         }
 
-        public ArticleId PostArticle(ArticlePostingRequest request)
+        public Article PostArticle(ArticlePostingRequest request)
         {
-            var articleId = new ArticleId("");
+            var id = Guid.NewGuid().ToString();
+
+            var articleId = new ArticleId(id);
 
             var categories = categoriesRepository.GetCategoriesBy(request.CategoriesIds);
 
@@ -48,7 +50,7 @@ namespace Blog.Business.Articles
 
             articlesRepository.Add(article);
 
-            return articleId;
+            return article;
         }
     }
 }

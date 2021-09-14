@@ -17,12 +17,12 @@ namespace Blog.Business.Categories
 
         private static void AddDomainModel(this IServiceCollection services)
         {
-            services.AddSingleton<ICategoriesRepository, InMemoryDataService>();
+            services.AddSingleton<ICategoriesRepository>(ctx => ctx.GetService<InMemoryDataService>());
         }
 
         private static void AddCategoriesQuery(this IServiceCollection services)
         {
-            services.AddSingleton<ICategoriesQuery, InMemoryDataService>();
+            services.AddSingleton<ICategoriesQuery>(ctx => ctx.GetService<InMemoryDataService>());
         }
     }
 }

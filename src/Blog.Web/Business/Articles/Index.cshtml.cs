@@ -15,12 +15,12 @@ namespace Blog.Business.Articles
 
         public IndexModel(IArticlesQuery articlesQuery)
         {
-            this.articlesQuery = articlesQuery;            
+            this.articlesQuery = articlesQuery;
         }
 
         public void OnGet()
         {
-            Articles = articlesQuery.GetArticles();
+            Articles = articlesQuery.GetArticles(request: null);
         }
     }
 }
