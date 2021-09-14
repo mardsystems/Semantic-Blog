@@ -4,7 +4,7 @@ namespace Blog.Business.Articles
 {
     public interface IArticlesPosting
     {
-        ArticleId PostArticle(ArticlePostingRequest request);
+        Article PostArticle(ArticlePostingRequest request);
     }
 
     public class ArticlePostingRequest

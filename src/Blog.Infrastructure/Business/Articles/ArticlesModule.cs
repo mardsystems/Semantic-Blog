@@ -21,12 +21,12 @@ namespace Blog.Business.Articles
 
         private static void AddDomainModel(this IServiceCollection services)
         {
-            services.AddSingleton<IArticlesRepository, InMemoryDataService>();
+            services.AddSingleton<IArticlesRepository>(ctx => ctx.GetService<InMemoryDataService>());
         }
 
         private static void AddArticlesQuery(this IServiceCollection services)
         {
-            services.AddSingleton<IArticlesQuery, InMemoryDataService>();
+            services.AddSingleton<IArticlesQuery>(ctx => ctx.GetService<InMemoryDataService>());
         }
 
         private static void AddArticlesComments(this IServiceCollection services)

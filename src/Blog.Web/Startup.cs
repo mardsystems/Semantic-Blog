@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -25,10 +26,24 @@ namespace Blog
         {
             services.AddInfraModule();
 
+            services.AddMvc(options =>
+            {
+                options.OutputFormatters.Insert(0, new XhtmlOutputFormatter());
+            });
+
+            services.AddControllers(options =>
+            {
+                options.RespectBrowserAcceptHeader = true;
+            })
+            .AddNewtonsoftJson(options =>
+            {
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            });
+
             services.AddRazorPages(options =>
             {
                 options.RootDirectory = "/Business";
-            });            
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -41,7 +56,9 @@ namespace Blog
             else
             {
                 app.UseExceptionHandler("/Error");
+                
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+
                 app.UseHsts();
             }
 
@@ -55,6 +72,8 @@ namespace Blog
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllers();
+
                 endpoints.MapRazorPages();
             });
         }

@@ -12,6 +12,8 @@ namespace Blog
     {
         public static void AddInfraModule(this IServiceCollection services)
         {
+            services.AddSingleton<InMemoryDataService>();
+
             services.AddBusinessModule();
         }
     }
