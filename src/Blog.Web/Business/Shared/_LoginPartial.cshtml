@@ -1,0 +1,10 @@
+﻿@if (@User.Identity.Name != null)
+{
+    <a class="item" asp-page="/Profile">@User.Identity.Name</a>
+    <a class="item" asp-page="/Logout">Logout</a>
+}
+else
+{
+    <a class="item" asp-page="/Register">Register</a>
+    <a class="item" asp-page="/Login">Login</a>
+}

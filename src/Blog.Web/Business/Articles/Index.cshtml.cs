@@ -18,9 +18,9 @@ namespace Blog.Business.Articles
             this.articlesQuery = articlesQuery;
         }
 
-        public void OnGet()
+        public void OnGet(ArticlesQueryRequest request)
         {
-            Articles = articlesQuery.GetArticles(request: null);
+            Articles = articlesQuery.GetArticles(request);
         }
     }
 }
