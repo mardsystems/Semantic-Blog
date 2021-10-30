@@ -58,7 +58,7 @@ namespace Blog
 
             services.AddRazorPages(options =>
             {
-                options.RootDirectory = "/Business";
+                options.RootDirectory = "/Modules";
             });
         }
 

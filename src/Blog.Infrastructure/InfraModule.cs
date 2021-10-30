@@ -1,4 +1,4 @@
-﻿using Blog.Business;
+﻿using Blog.Modules;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -14,7 +14,7 @@ namespace Blog
         {
             services.AddSingleton<InMemoryDataService>();
 
-            services.AddBusinessModule();
+            services.AddModulesModule();
         }
     }
 }
