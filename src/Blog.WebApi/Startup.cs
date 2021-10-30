@@ -3,10 +3,13 @@ using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,6 +31,11 @@ namespace Blog
         {
             services.AddInfraModule();
 
+            services.AddMvc(options =>
+            {
+                options.OutputFormatters.Insert(0, new XhtmlOutputFormatter());
+            });
+
             services
                 .AddControllers(options =>
                 {
@@ -38,22 +46,22 @@ namespace Blog
                     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
                 });
 
-            services
-                .AddAuthentication(options =>
-                {
-                    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                    options.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
-                })
-                .AddCookie()
-                .AddGoogle(options =>
-                {
-                    options.ClientId = Configuration["Authentication:Google:ClientId"];
-                    options.ClientSecret = Configuration["Authentication:Google:ClientSecret"];
-                });
+            //services
+            //    .AddAuthentication(options =>
+            //    {
+            //        options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            //        options.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
+            //    })
+            //    .AddCookie()
+            //    .AddGoogle(options =>
+            //    {
+            //        options.ClientId = Configuration["Authentication:Google:ClientId"];
+            //        options.ClientSecret = Configuration["Authentication:Google:ClientSecret"];
+            //    });
 
-            services.AddRazorPages(options =>
+            services.AddSwaggerGen(c =>
             {
-                options.RootDirectory = "/Modules";
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Blog", Version = "v1" });
             });
         }
 
@@ -63,29 +71,23 @@ namespace Blog
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                app.UseExceptionHandler("/Error");
-                
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
 
-                app.UseHsts();
+                app.UseSwagger();
+                
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Blog v1"));
             }
 
             app.UseHttpsRedirection();
 
-            app.UseStaticFiles();
-
             app.UseRouting();
 
-            app.UseAuthentication();
+            //app.UseAuthentication();
 
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapRazorPages();
+                endpoints.MapControllers();
             });
         }
     }

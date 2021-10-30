@@ -4,9 +4,9 @@ using System.Linq;
 using System.Web;
 
 namespace Blog.Modules.Articles
-{
-    [Route("/api/articles")]
-    public class ArticlesController : Controller
+{    
+    [Route("[controller]")]
+    public class ArticlesController : ControllerBase
     {
         private readonly IArticlesQuery articlesQuery;
 
@@ -19,6 +19,7 @@ namespace Blog.Modules.Articles
             this.articlesPosting = articlesPosting;
         }
 
+        [HttpGet]
         public IActionResult GetArticles(ArticlesQueryRequest request)
         {
             var articles = articlesQuery.GetArticles(request);
@@ -27,13 +28,13 @@ namespace Blog.Modules.Articles
                 .Select(article => new Resource<Article>
                 {
                     Title = $"Article #{article.Id}",
-                    HRef = $"/api/articles/{article.Id}",
+                    HRef = $"/articles/{article.Id}",
                     Data = article,
                     Links = new Link[]
                     {
-                        new Link {Rel = "article-details", HRef = $"/api/articles/{article.Id}", Text = "Detail"},
-                        new Link {Rel = "article-edit", HRef = $"/api/articles/{article.Id}/edit", Text = "Edit"},
-                        new Link {Rel = "article-delete", HRef = $"/api/articles/{article.Id}/delete", Text = "Delete"}
+                        new Link {Rel = "article-details", HRef = $"/articles/{article.Id}", Text = "Detail"},
+                        new Link {Rel = "article-edit", HRef = $"/articles/{article.Id}/edit", Text = "Edit"},
+                        new Link {Rel = "article-delete", HRef = $"/articles/{article.Id}/delete", Text = "Delete"}
                     }
                 })
                 .ToArray();
@@ -41,12 +42,12 @@ namespace Blog.Modules.Articles
             var resource = new ResourceCollection<Article>
             {
                 Title = "Articles",
-                HRef = "/api/articles",
+                HRef = "/articles",
                 Data = data,
                 Links = new Link[]
                 {
-                    new Link {Rel = "articles-query", HRef = "/api/articles/query", Text = "Articles Query"},
-                    new Link {Rel = "articles-posting", HRef = "/api/articles/posting", Text = "Articles Posting"}
+                    new Link {Rel = "articles-query", HRef = "/articles/query", Text = "Articles Query"},
+                    new Link {Rel = "articles-posting", HRef = "/articles/posting", Text = "Articles Posting"}
                 }
             };
 
@@ -64,10 +65,10 @@ namespace Blog.Modules.Articles
             var resource = new ResourceForm<ArticlesQueryRequest>
             {
                 Title = "Articles Query",
-                HRef = "/api/articles/query",
+                HRef = "/articles/query",
                 Data = request,
                 Method = "GET",
-                Action = "/api/articles",
+                Action = "/articles",
                 Links = new Link[] { }
             };
 
@@ -84,12 +85,12 @@ namespace Blog.Modules.Articles
             var resource = new Resource<Article>
             {
                 Title = $"Article #{article.Id}",
-                HRef = $"/api/articles/{article.Id}",
+                HRef = $"/articles/{article.Id}",
                 Data = article,
                 Links = new Link[]
                 {
-                    new Link {Rel = "article-edit", HRef = $"/api/articles/{article.Id}/edit", Text = "Edit"},
-                    new Link {Rel = "article-delete", HRef = $"/api/articles/{article.Id}/delete", Text = "Delete"}
+                    new Link {Rel = "article-edit", HRef = $"/articles/{article.Id}/edit", Text = "Edit"},
+                    new Link {Rel = "article-delete", HRef = $"/articles/{article.Id}/delete", Text = "Delete"}
                 }
             };
 
@@ -108,10 +109,10 @@ namespace Blog.Modules.Articles
             var resource = new ResourceForm<ArticlePostingRequest>
             {
                 Title = "Articles Posting",
-                HRef = "/api/articles/posting",
+                HRef = "/articles/posting",
                 Data = request,
                 Method = "POST",
-                Action = "/api/articles/posting",
+                Action = "/articles/posting",
                 Links = new Link[] { }
             };
 
@@ -126,13 +127,13 @@ namespace Blog.Modules.Articles
             var resource = new Resource<Article>
             {
                 Title = $"Article #{article.Id}",
-                HRef = $"/api/articles/{article.Id}",
+                HRef = $"/articles/{article.Id}",
                 Data = article,
                 Links = new Link[]
                 {
-                    new Link {Rel = "article-details", HRef = $"/api/articles/{article.Id}", Text = "Detail"},
-                    new Link {Rel = "article-edit", HRef = $"/api/articles/{article.Id}/edit", Text = "Edit"},
-                    new Link {Rel = "article-delete", HRef = $"/api/articles/{article.Id}/delete", Text = "Delete"}
+                    new Link {Rel = "article-details", HRef = $"/articles/{article.Id}", Text = "Detail"},
+                    new Link {Rel = "article-edit", HRef = $"/articles/{article.Id}/edit", Text = "Edit"},
+                    new Link {Rel = "article-delete", HRef = $"/articles/{article.Id}/delete", Text = "Delete"}
                 }
             };
 

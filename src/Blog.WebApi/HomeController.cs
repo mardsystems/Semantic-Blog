@@ -3,19 +3,20 @@ using System.Web;
 
 namespace Blog.Modules
 {
-    [Route("/api")]
-    public class HomeController : Controller
+    [Route("/")]
+    public class HomeController : ControllerBase
     {
+        [HttpGet]
         public IActionResult Index()
         {
             var resource = new Resource
             {
                 Title = "Home",
-                HRef = "/api",
+                HRef = "/",
                 Links = new Link[]
                 {
-                    new Link {Rel = "articles", HRef = "/api/articles", Text = "Articles"},
-                    new Link {Rel = "categories", HRef = "/api/categories", Text = "Categories"}
+                    new Link {Rel = "articles", HRef = "/articles", Text = "Articles"},
+                    new Link {Rel = "categories", HRef = "/categories", Text = "Categories"}
                 }
             };
 

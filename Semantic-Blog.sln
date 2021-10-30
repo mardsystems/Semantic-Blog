@@ -50,6 +50,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Kubernetes", "Kubernetes", 
 		k8s\service.yaml = k8s\service.yaml
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.WebApi", "src\Blog.WebApi\Blog.WebApi.csproj", "{53CFC12D-DE4A-4E71-8D72-D610A6B43C14}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -88,6 +90,10 @@ Global
 		{05200289-02CA-468C-B3A7-CC84DAC4B096}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{05200289-02CA-468C-B3A7-CC84DAC4B096}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{05200289-02CA-468C-B3A7-CC84DAC4B096}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53CFC12D-DE4A-4E71-8D72-D610A6B43C14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53CFC12D-DE4A-4E71-8D72-D610A6B43C14}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53CFC12D-DE4A-4E71-8D72-D610A6B43C14}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53CFC12D-DE4A-4E71-8D72-D610A6B43C14}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -105,6 +111,7 @@ Global
 		{1A33269D-18CF-4D13-810B-9A7D926BD276} = {CE9BE0D4-76A6-48A8-A192-774992C348CB}
 		{05200289-02CA-468C-B3A7-CC84DAC4B096} = {B77BBA49-B72D-4C18-B0F4-4E58B45A0630}
 		{59F76835-9734-4912-9BA0-C62795632AEA} = {D39D832A-A1EA-4124-9553-ABF312CFF19C}
+		{53CFC12D-DE4A-4E71-8D72-D610A6B43C14} = {55D9131B-CC93-4478-BFE9-6DFAB9844F69}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CBC42768-CD44-44E6-B35A-BB92F9146A96}
