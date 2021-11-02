@@ -19,6 +19,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         public XhtmlOutputFormatter()
         {
             SupportedMediaTypes.Add(MediaTypeHeaderValue.Parse("text/html"));
+            
+            SupportedMediaTypes.Add(MediaTypeHeaderValue.Parse("application/vnd.api+xhtml"));
 
             SupportedEncodings.Add(Encoding.UTF8);
 
