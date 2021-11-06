@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31624.102
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blog.Web", "src\Blog.Web\Blog.Web.csproj", "{59B36EE4-19A8-4B83-ADDE-53CC2437E989}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blog.Pages", "src\Blog.Pages\Blog.Pages.csproj", "{59B36EE4-19A8-4B83-ADDE-53CC2437E989}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 - Presentation", "1 - Presentation", "{55D9131B-CC93-4478-BFE9-6DFAB9844F69}"
 EndProject
@@ -50,9 +50,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Kubernetes", "Kubernetes", 
 		k8s\service.yaml = k8s\service.yaml
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blog.WebApi", "src\Blog.WebApi\Blog.WebApi.csproj", "{53CFC12D-DE4A-4E71-8D72-D610A6B43C14}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blog.Api", "src\Blog.Api\Blog.Api.csproj", "{53CFC12D-DE4A-4E71-8D72-D610A6B43C14}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.WebApp", "src\Blog.WebApp\Blog.WebApp.csproj", "{14A2D350-1E05-4EBB-BC5F-29C1CF10BB59}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blog.Mvc", "src\Blog.Mvc\Blog.Mvc.csproj", "{14A2D350-1E05-4EBB-BC5F-29C1CF10BB59}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

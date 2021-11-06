@@ -2,7 +2,6 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-    <AssemblyName>Blog</AssemblyName>
     <RootNamespace>Blog</RootNamespace>
     <UserSecretsId>b98bcc1f-c169-442b-8ba0-cd4b3b5ea7a9</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
