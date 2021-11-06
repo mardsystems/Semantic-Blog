@@ -1,10 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Linq;
-using System.Web;
 
 namespace Blog.Modules.Articles
-{    
+{
     [Route("[controller]")]
     public class ArticlesController : ControllerBase
     {
@@ -12,46 +9,34 @@ namespace Blog.Modules.Articles
 
         private readonly IArticlesPosting articlesPosting;
 
-        public ArticlesController(IArticlesQuery articlesQuery, IArticlesPosting articlesPosting)
+        private readonly IArticlesApiFormatter articlesApiFormatter;
+
+        public ArticlesController(
+            IArticlesQuery articlesQuery,
+            IArticlesPosting articlesPosting,
+            IArticlesApiFormatter articlesApiFormatter)
         {
             this.articlesQuery = articlesQuery;
 
             this.articlesPosting = articlesPosting;
+
+            this.articlesApiFormatter = articlesApiFormatter;
         }
 
+
         [HttpGet]
-        public IActionResult GetArticles(ArticlesQueryRequest request)
+        public IActionResult GetArticles(string title)
         {
-            var articles = articlesQuery.GetArticles(request);
-
-            var data = articles
-                .Select(article => new Resource<Article>
-                {
-                    Title = $"Article #{article.Id}",
-                    HRef = $"/articles/{article.Id}",
-                    Data = article,
-                    Links = new Link[]
-                    {
-                        new Link {Rel = "article-details", HRef = $"/articles/{article.Id}", Text = "Detail"},
-                        new Link {Rel = "article-edit", HRef = $"/articles/{article.Id}/edit", Text = "Edit"},
-                        new Link {Rel = "article-delete", HRef = $"/articles/{article.Id}/delete", Text = "Delete"}
-                    }
-                })
-                .ToArray();
-
-            var resource = new ResourceCollection<Article>
+            var request = new ArticlesQueryRequest
             {
-                Title = "Articles",
-                HRef = "/articles",
-                Data = data,
-                Links = new Link[]
-                {
-                    new Link {Rel = "articles-query", HRef = "/articles/query", Text = "Articles Query"},
-                    new Link {Rel = "articles-posting", HRef = "/articles/posting", Text = "Articles Posting"}
-                }
+                Title = title,
             };
 
-            return Ok(resource);
+            var articles = articlesQuery.GetArticles(request);
+
+            var output = articlesApiFormatter.Format(articles);
+
+            return Ok(output);
         }
 
         [HttpGet("query")]
@@ -62,17 +47,9 @@ namespace Blog.Modules.Articles
                 Title = null,
             };
 
-            var resource = new ResourceForm<ArticlesQueryRequest>
-            {
-                Title = "Articles Query",
-                HRef = "/articles/query",
-                Data = request,
-                Method = "GET",
-                Action = "/articles",
-                Links = new Link[] { }
-            };
+            var output = articlesApiFormatter.Format(request);
 
-            return Ok(resource);
+            return Ok(output);
         }
 
         [HttpGet("{id}")]
@@ -82,19 +59,9 @@ namespace Blog.Modules.Articles
 
             var article = articlesQuery.GetArticle(articleId);
 
-            var resource = new Resource<Article>
-            {
-                Title = $"Article #{article.Id}",
-                HRef = $"/articles/{article.Id}",
-                Data = article,
-                Links = new Link[]
-                {
-                    new Link {Rel = "article-edit", HRef = $"/articles/{article.Id}/edit", Text = "Edit"},
-                    new Link {Rel = "article-delete", HRef = $"/articles/{article.Id}/delete", Text = "Delete"}
-                }
-            };
+            var output = articlesApiFormatter.FormatDetails(article);
 
-            return Ok(resource);
+            return Ok(output);
         }
 
         [HttpGet("posting")]
@@ -106,17 +73,10 @@ namespace Blog.Modules.Articles
                 Title = "Title #"
             };
 
-            var resource = new ResourceForm<ArticlePostingRequest>
-            {
-                Title = "Articles Posting",
-                HRef = "/articles/posting",
-                Data = request,
-                Method = "POST",
-                Action = "/articles/posting",
-                Links = new Link[] { }
-            };
+            var output = articlesApiFormatter.FormatPosting(request);
 
-            return Ok(resource);
+
+            return Ok(output);
         }
 
         [HttpPost("posting")]
@@ -124,20 +84,9 @@ namespace Blog.Modules.Articles
         {
             var article = articlesPosting.PostArticle(request);
 
-            var resource = new Resource<Article>
-            {
-                Title = $"Article #{article.Id}",
-                HRef = $"/articles/{article.Id}",
-                Data = article,
-                Links = new Link[]
-                {
-                    new Link {Rel = "article-details", HRef = $"/articles/{article.Id}", Text = "Detail"},
-                    new Link {Rel = "article-edit", HRef = $"/articles/{article.Id}/edit", Text = "Edit"},
-                    new Link {Rel = "article-delete", HRef = $"/articles/{article.Id}/delete", Text = "Delete"}
-                }
-            };
+            var output = articlesApiFormatter.FormatPosting(article);
 
-            return CreatedAtAction(nameof(GetArticleDetails), new { id = article.Id }, resource);
+            return CreatedAtAction(nameof(GetArticleDetails), new { id = article.Id }, output);
         }
     }
 }

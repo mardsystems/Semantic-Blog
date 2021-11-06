@@ -1,3 +1,4 @@
+using Blog.Modules.Articles;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Builder;
@@ -31,9 +32,13 @@ namespace Blog
         {
             services.AddInfraModule();
 
+            services.AddTransient<IArticlesApiFormatter, ArticlesXhtmlApiFormatter>();
+
             services.AddMvc(options =>
             {
-                options.OutputFormatters.Insert(0, new XhtmlOutputFormatter());
+                options.OutputFormatters.Insert(0, new XhtmlApiOutputFormatter());
+
+                //options.OutputFormatters.Insert(1, new JsonApiOutputFormatter());
             });
 
             services
@@ -73,7 +78,7 @@ namespace Blog
                 app.UseDeveloperExceptionPage();
 
                 app.UseSwagger();
-                
+
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Blog v1"));
             }
 

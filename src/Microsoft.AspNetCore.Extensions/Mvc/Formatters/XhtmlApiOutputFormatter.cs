@@ -5,21 +5,21 @@ using System.Collections;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Net.Http.Xhtml.Api;
 using System.Reflection;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
-using System.Web;
 using System.Xml;
 
 namespace Microsoft.AspNetCore.Mvc.Formatters
 {
-    public class XhtmlOutputFormatter : XmlSerializerOutputFormatter
+    public class XhtmlApiOutputFormatter : XmlSerializerOutputFormatter
     {
-        public XhtmlOutputFormatter()
+        public XhtmlApiOutputFormatter()
         {
             SupportedMediaTypes.Add(MediaTypeHeaderValue.Parse("text/html"));
-            
+
             SupportedMediaTypes.Add(MediaTypeHeaderValue.Parse("application/vnd.api+xhtml"));
 
             SupportedEncodings.Add(Encoding.UTF8);
@@ -41,6 +41,7 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         {
             try
             {
+                
                 var enconding = base.SelectCharacterEncoding(context);
 
                 var settings = new XmlWriterSettings();

@@ -1,4 +1,4 @@
-﻿namespace Microsoft.AspNetCore.Mvc
+﻿namespace System.Net.Http.Xhtml.Api
 {
     public class ResourceForm<T> : Resource<T>
     {
